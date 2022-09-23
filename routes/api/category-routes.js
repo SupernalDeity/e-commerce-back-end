@@ -27,6 +27,9 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
   // updates a categpry by its `id`
+  await Product.destroy({
+    where: { category_id: req.params.id }
+  })
   const updatedCategory = await Category.update({ category_name: req.body.category_name },
     {
       where: { id: req.params.id }
